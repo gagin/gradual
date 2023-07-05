@@ -1,5 +1,6 @@
 import argparse
 import sys
+import os
 from keys_lib import init, encrypt_data, decrypt_data
 
 def parse_arguments():
@@ -11,7 +12,29 @@ def parse_arguments():
     parser.add_argument("-encrypt", metavar="FILE", help="Encrypt the specified file")
     parser.add_argument("-decrypt", metavar="FILE", help="Decrypt the specified file")
     parser.add_argument("-key", help="Encryption key")
+    parser.add_argument("-showkey", action="store_true", help="Print the export command to initialize the environment variable with the encryption key")
+    parser.add_argument("-newkey", action="store_true", help="Generate a new encryption key and print the export command to initialize the environment variable with the new key")
     return parser.parse_args()
+
+def generate_new_key():
+    """
+    Generates a new encryption key and prints the export command to initialize the environment variable with the new key.
+    """
+    os.environ.pop("PY_ENCRYPTION_KEY", None)
+    key = init(new="yes")
+    key_str = key.decode("utf-8")
+    command = f'export PY_ENCRYPTION_KEY="{key_str}"'
+    print(command)
+
+
+def show_key():
+    """
+    Prints the export command to initialize the environment variable with the encryption key.
+    """
+    key = init()
+    key_str = key.decode("utf-8")
+    command = f'export PY_ENCRYPTION_KEY="{key_str}"'
+    print(command)
 
 def prompt_for_key():
     """
@@ -49,6 +72,12 @@ def main():
         key = prompt_for_key()
     elif args.key:
         key = args.key.encode("utf-8")
+    elif args.showkey:
+        show_key()
+        return
+    elif args.newkey:
+        generate_new_key()
+        return
     else:
         key = init()
 
@@ -57,6 +86,7 @@ def main():
 
     if args.decrypt:
         decrypt_file(args.decrypt, key)
+
 
 if __name__ == "__main__":
     main()

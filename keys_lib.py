@@ -1,13 +1,13 @@
 import os
 from cryptography.fernet import Fernet
 
-def init():
+def init(new=False):
     """
     Initializes the encryption key. Loads it from the environment variable if it exists,
     otherwise generates a new key and sets it as an environment variable.
     """
     key_str = os.environ.get("PY_ENCRYPTION_KEY")
-    if key_str is None:
+    if new or key_str is None:
         key = Fernet.generate_key()
         key_str = key.decode("utf-8")
         os.environ["PY_ENCRYPTION_KEY"] = key_str
