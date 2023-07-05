@@ -1,6 +1,23 @@
-# gradual
+# gradually improving GPT tool
 This a command-line ChatGPT client that stores dialog histories in BigQuery.
-Almost all code (except db structure and some SQL) is written by ChatGPT, orchestrated by me. I'm not a programmer.
+Use "-model gpt-4" to use gpt-4 (or whatever OpenAI model that supports ChatCompletion API).
+Almost all code (except db structure and some SQL) is written by ChatGPT (in free mode, 3.5 Turbo), orchestrated by me. I'm not a programmer.
+
+# Purpose
+I made this for training purposes mostly, but also because I want to use GPT-4 via API, which is with my volume is cheaper than ChatGPT+ subscription. I can use Playground, of course, but I like to keep history and have ability to extend functionality.
+I acknowledge that this may seem like 'reinventing the wheel,' as many of these facilities are already available in existing code. However, see above, training. Moreover, it's an experimental endeavor to explore how someone without a programming background can work with GPT.
+
+## ToDo
+- Auto-continuation depending on stop-reason
+- Background questions augmentation (optional, user-configurable)
+- Background response augmentation (optional, user-configurable)
+- Browser UI
+- Model response wait indicator
+- Auto-naming threads
+- Control and logging for temperature and other parameters
+- Investingate why GPT-3.5-Turbo is so much slower via API compared to ChatGPT
+
+# Setup
 
 ## DB schema
 
@@ -40,5 +57,8 @@ CREATE TABLE `db4gpt.gpt_dataset.request_log` (
 3. Encrypt it with `keys-util.py -encrypt key-json-file > bq-key-encrypted.txt` and add a path to the encrypted file into bqconfig.yml
 4. Do the same with your OpenAI API key.
 This is done to avoid plain text keys lying on your drive. Bqconfig.yml also uses path relative to your home directory for the same paranoid reason.
+
+
+
 
 
