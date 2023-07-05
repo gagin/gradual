@@ -35,10 +35,10 @@ CREATE TABLE `db4gpt.gpt_dataset.request_log` (
 )
 ```
 ## Access keys
-Create a service account for this project with a BQ admin role, and generate a JSON key for it.
-Encrypt it with `keys-util.py -encrypt key-json-file > bq-key-encrypted.txt` and add a path to the encrypted file into bqconfig.yml
-This is done to avoid plain text keys lying on your drive.
-Note: currently you need to use debugger to see the generated key (TBD), put it into environment variable PY_ENCRYPTION_KEY
+1. Create a local encryption key with `python3 keys-util.py -newkey`, execute shell command it will produce, confirm with `python3 keys-util.py -showkey`. Record the key somewhere.
+2. Create a service account for this project with a BQ admin role, and generate a JSON key for it.
+3. Encrypt it with `keys-util.py -encrypt key-json-file > bq-key-encrypted.txt` and add a path to the encrypted file into bqconfig.yml
+4. Do the same with your OpenAI API key.
+This is done to avoid plain text keys lying on your drive. Bqconfig.yml also uses path relative to your home directory for the same paranoid reason.
 
-Do the same with your OpenAI API key.
 
