@@ -1,0 +1,5 @@
+service_account: db4gpt@db4gpt.iam.gserviceaccount.com 
+enc_json_key_file: ~/Documents/keys/bq-key_enc.txt
+project_id: db4gpt 
+dataset: gpt_dataset
+enc_api_key: ~/Documents/keys/gpt4key_enc.txt
