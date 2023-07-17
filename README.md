@@ -11,11 +11,13 @@ I acknowledge that this may seem like 'reinventing the wheel,' as many of these 
 - Auto-continuation depending on stop-reason
 - Background questions augmentation (optional, user-configurable)
 - Background response augmentation (optional, user-configurable)
+- System message support
 - Browser UI
 - Model response wait indicator
 - Auto-naming threads
 - Control and logging for temperature and other parameters
 - Investingate why GPT-3.5-Turbo is so much slower via API compared to ChatGPT
+- Optimization: store message stack and messages in memory, update stack in the code
 
 # Setup
 
@@ -54,7 +56,7 @@ CREATE TABLE `db4gpt.gpt_dataset.request_log` (
 ## Access keys
 1. Create a local encryption key with `python3 keys-util.py -newkey`, execute shell command it will produce, confirm with `python3 keys-util.py -showkey`. Record the key somewhere.
 2. Create a service account for this project with a BQ admin role, and generate a JSON key for it.
-3. Encrypt it with `keys-util.py -encrypt key-json-file > bq-key-encrypted.txt` and add a path to the encrypted file into bqconfig.yml
+3. Encrypt it with `keys-util.py -encrypt key-json-file > bq-key-encrypted.txt` and add a path to the encrypted file into config.yml
 4. Do the same with your OpenAI API key.
 This is done to avoid plain text keys lying on your drive. Bqconfig.yml also uses path relative to your home directory for the same paranoid reason.
 
