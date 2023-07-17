@@ -12,12 +12,12 @@ I acknowledge that this may seem like 'reinventing the wheel,' as many of these 
 - Background questions augmentation (optional, user-configurable)
 - Background response augmentation (optional, user-configurable)
 - System message support
-- Browser UI
+- Browser UI with auto-named threads
 - Model response wait indicator
-- Auto-naming threads
 - Control and logging for temperature and other parameters
-- Investingate why GPT-3.5-Turbo is so much slower via API compared to ChatGPT
 - Optimization: store message stack and messages in memory, update stack in the code
+- Optimization: don't wait for db updates when possible
+- Stack length control against model limits
 
 # Setup
 

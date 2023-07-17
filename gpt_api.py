@@ -1,11 +1,15 @@
-import openai
+import os
+import asyncio
 import yaml
 from datetime import datetime
+
+import openai
+
 from bq import db
 from keys_lib import decrypt_data
-import os
 
-def gpt_request(user_message, previous_response_id, model_requested="gpt-3.5-turbo"):#, **kwargs)
+
+async def gpt_request(user_message, previous_response_id, model_requested="gpt-3.5-turbo"):#, **kwargs)
 
     if not openai.api_key:
         config = yaml.safe_load(open("bqconfig.yml"))
